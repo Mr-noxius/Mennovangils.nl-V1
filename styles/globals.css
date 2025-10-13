@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #__next { height: 100%; }
+body { @apply bg-bg-light text-ink; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; font-family: Inter, sans-serif; }
+
+/* Cinematic hero */
+.hero-overlay { background: linear-gradient(180deg, rgba(11,11,11,0.6), rgba(11,11,11,0.6)); }
+
+/* Buttons */
+.btn-brand { @apply bg-brand text-ink px-6 py-2 rounded-full font-medium; }
+.btn-outline { @apply border border-brand text-brand px-6 py-2 rounded-full; }
+
+/* Dark mode */
+.dark body { background-color: #080808; color: #f7f3ef; }
+.dark .btn-brand { @apply text-ink; }
+
+/* Link focus */
+a:focus { outline: 2px solid rgba(0,0,0,0.1); outline-offset: 2px; }
