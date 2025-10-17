@@ -13,8 +13,8 @@ const WORK_ITEMS = [
     id: 'image-1',
     type: 'image',
     title: 'Behind the Scenes',
-    thumbnail: '/images/behind-scenes.jpg',
-    full: '/images/behind-scenes-full.jpg',
+    thumbnail: '/images/streetart.png',
+    full: '/images/streetart.png',
   },
   {
     id: 'image-2',
