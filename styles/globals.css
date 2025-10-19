@@ -3,18 +3,306 @@
 @tailwind utilities;
 
 html, body, #__next { height: 100%; }
-body { @apply bg-bg-light text-ink; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; font-family: Inter, sans-serif; }
+
+/* Default to dark mode (server-side html class will also be "dark") */
+body { 
+    @apply bg-gray-900 text-gray-100; 
+    -webkit-font-smoothing:antialiased; 
+    -moz-osx-font-smoothing:grayscale; 
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
 
 /* Cinematic hero */
 .hero-overlay { background: linear-gradient(180deg, rgba(11,11,11,0.6), rgba(11,11,11,0.6)); }
 
-/* Buttons */
-.btn-brand { @apply bg-brand text-ink px-6 py-2 rounded-full font-medium; }
-.btn-outline { @apply border border-brand text-brand px-6 py-2 rounded-full; }
+/* Better global text visibility: stronger contrast and clearer hierarchy */
+:root {
+  --text-strong: #ffffff;        /* primary text */
+  --text-muted: #d1d5db;         /* secondary text */
+  --text-subtle: #9ca3af;        /* subtle hints */
+  --card-bg: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.10);
+  --brand-bg: rgba(255,255,255,0.06);
+}
 
-/* Dark mode */
-.dark body { background-color: #080808; color: #f7f3ef; }
-.dark .btn-brand { @apply text-ink; }
+/* Base page text */
+body {
+  color: var(--text-strong);
+  background-color: #0b0b0b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+}
 
-/* Link focus */
-a:focus { outline: 2px solid rgba(0,0,0,0.1); outline-offset: 2px; }
+/* Use the custom font only for display titles */
+.display-font,
+.hero-title,
+.service-card h3,
+.navbar-elevated .brand-title {
+  font-family: 'YourFont', Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Make hero H1 pop with subtle dark shadow for contrast over images */
+main > section:first-of-type .relative.z-10 h1,
+main > section:first-of-type .relative.z-10 h1 strong {
+  text-shadow: 0 10px 30px rgba(0,0,0,0.72);
+  -webkit-text-stroke: 0.2px rgba(0,0,0,0.12); /* slight stroke helps on busy backgrounds */
+  /* ensure hero title uses the custom font */
+  font-family: 'YourFont', Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Paragraphs and body copy */
+p, li, span, a {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Links should be readable and slightly brighter on hover */
+a {
+  color: var(--text-strong);
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,0.06);
+}
+a:hover, a:focus {
+  color: #ffffff;
+  text-decoration-color: rgba(255,255,255,0.16);
+  opacity: 0.98;
+}
+
+/* Navbar text: increase size and contrast so it reads on the hero */
+.navbar-elevated {
+  background-color: rgba(255,255,255,0.08);
+  -webkit-backdrop-filter: blur(12px) saturate(140%) brightness(1.08);
+  backdrop-filter: blur(12px) saturate(140%) brightness(1.08);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.navbar-elevated a,
+.navbar-elevated span {
+  color: var(--text-strong);
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+
+/* Buttons: stronger text color and clearer backgrounds */
+.btn-brand {
+  @apply px-6 py-2 rounded-full font-medium;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  color: #0b0b0b; /* dark text on light pill for contrast */
+  box-shadow: 0 8px 24px rgba(2,6,23,0.6);
+}
+.btn-outline {
+  @apply inline-flex items-center justify-center px-6 py-2 rounded-full text-sm md:text-base font-medium relative;
+  background: rgba(255,255,255,0.035);        /* subtle filled surface */
+  color: #ffffff;                              /* white text for contrast */
+  border: 1px solid rgba(255,255,255,0.12);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  transition: transform .18s cubic-bezier(.2,.9,.25,1), box-shadow .18s ease, background .12s ease;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+}
+.btn-outline:hover,
+.btn-outline:focus {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 22px 60px rgba(2,6,23,0.68);
+  background: rgba(255,255,255,0.08);
+  outline: none;
+}
+.btn-brand:hover,
+.btn-brand:focus {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 26px 80px rgba(255,107,107,0.18);
+  filter: brightness(1.04);
+  outline: none;
+}
+.btn-outline:active,
+.btn-brand:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.45);
+}
+
+/* Service cards: stronger background, rounded corners, deeper shadow for separation */
+.service-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.035));
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+  box-shadow:
+    0 26px 60px rgba(2,6,23,0.72),
+    0 8px 20px rgba(0,0,0,0.35) inset;
+  transition: box-shadow .18s ease, background .18s ease; /* keep subtle transitions */
+  min-height: 160px;
+  overflow: hidden;
+}
+
+/* Hover / focus: lift and brighten */
+.service-card:hover,
+.service-card:focus-within {
+  /* no transform/translate on card hover anymore */
+  box-shadow: 0 28px 80px rgba(2,6,23,0.68); /* subtle deepening only */
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.045));
+  border-color: rgba(255,255,255,0.14);
+}
+
+/* Text inside cards (use custom font for card titles) */
+.service-card h3 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-family: 'YourFont', Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Form card / input styling to match service-card visuals */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255,255,255,0.02);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.06);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  backdrop-filter: blur(6px) saturate(120%);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.35);
+  transition: box-shadow .15s ease, transform .12s ease, border-color .12s ease;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.form-input::placeholder { color: rgba(255,255,255,0.45); }
+
+/* Focus: brighter border and subtle lift */
+.form-input:focus {
+  border-color: rgba(255,255,255,0.16);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6), inset 0 2px 8px rgba(0,0,0,0.35);
+  transform: translateY(-1px);
+}
+
+/* Ensure service-card padding and spacing look consistent here too */
+.service-card { /* keep existing service-card rules but ensure padding is applied for forms */
+  /* ...existing service-card styles... */
+}
+
+/* Smaller helper text inside forms */
+.service-card .text-sm { color: #c7ccd6; }
+
+/* Project tiles: match service-card visuals (ensure this block is present/overwrites earlier rules) */
+.project-card {
+  position: relative;
+  width: 100%;
+  height: 220px;                 /* fixed card height for uniformity */
+  border-radius: 1rem;
+  overflow: hidden;
+  display: block;
+  background: transparent;
+  box-shadow: 0 20px 50px rgba(2,6,23,0.66);
+  transition: box-shadow .18s ease, background .18s ease;
+}
+
+/* larger fixed height on bigger screens */
+@media (min-width: 768px) {
+  .project-card { height: 260px; }
+}
+@media (min-width: 1024px) {
+  .project-card { height: 300px; }
+}
+
+/* thumbnail fills the card (keeps same size across all cards) */
+.project-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.project-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+.project-card:hover .project-thumb img { transform: scale(1.04); }
+
+/* consistent overlay and info placement */
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: linear-gradient(180deg, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+
+.project-info {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.20));
+  border-radius: 0.6rem;
+}
+
+/* ensure titles and text are readable over image */
+.project-info h3 {
+  color: #ffffff;
+  margin: 0;
+  font-size: 1.08rem;   /* slightly larger */
+  line-height: 1.08;
+}
+.project-info p {
+  color: #d1d5db;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* place coming tag above the info and keep pointer-events none so card handles clicks */
+.comcoming-tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 40;
+  padding: 3px 7px;               /* smaller pill */
+  font-size: 10px;               /* reduced text size */
+  font-weight: 700;
+  border-radius: 999px;
+  background: linear-gradient(180deg,#facc15,#f59e0b);
+  color: #0b0b0b;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.36); /* a bit lighter shadow */
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+/* keep hover lift but slightly stronger for bigger cards */
+.project-card:hover,
+.project-card:focus-within {
+  /* no transform/translate on card hover anymore */
+  box-shadow: 0 28px 80px rgba(2,6,23,0.68); /* subtle deepening only */
+}
+
+/* adjust button inside overlay (a bit larger) */
+.project-info .btn-outline {
+  align-self: flex-start;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+/* responsive tweaks */
+@media (min-width: 768px) {
+  .project-card { min-height: 240px; }
+  .project-info { left: 18px; right: 18px; bottom: 18px; padding: 12px 14px; }
+  .project-info h3 { font-size: 1.12rem; }
+}
