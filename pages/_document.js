@@ -5,6 +5,10 @@ class MyDocument extends Document {
     return (
       <Html className="dark">
         <Head>
+          {/* Favicon */}
+          <link rel="icon" href="/logo.png" />
+          
+          {/* Preload font (zoals jij al had) */}
           <link
             rel="preload"
             href="/fonts/YourFont.woff2"
