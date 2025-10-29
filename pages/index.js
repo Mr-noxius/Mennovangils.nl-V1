@@ -4,6 +4,7 @@ export default function Home() {
   return (
     <main className="pt-24">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <link rel="icon" type="image/png" href="/logo.png"></link>
         <img src="/hero.jpg" alt="Hero background" className="absolute inset-0 w-full h-full object-cover" onError={(e)=>{e.target.style.display='none'}} />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 text-center px-6">
