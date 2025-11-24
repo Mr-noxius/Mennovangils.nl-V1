@@ -10,10 +10,7 @@
     - Clean About and Contact pages with CV download and booking form.
 
     ## Setup
-    1. Replace `/public/logo.png` with your uploaded logo (transparent PNG recommended).
-    2. Add a high-res hero image as `/public/hero.jpg` (optional — page falls back to dark overlay if absent).
-    3. Replace `/public/MennoVanGils_CV.pdf` with your real CV (same filename).
-    4. Install and run:
+    1. Install and run:
 
    ```bash
    npm install
