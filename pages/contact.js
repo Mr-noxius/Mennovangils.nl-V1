@@ -46,19 +46,6 @@ export default function Contact() {
             {status && <span className={`text-sm ${status.ok ? 'text-green-400' : 'text-rose-400'}`}>{status.msg}</span>}
           </div>
         </form>
-
-        <form className="service-card p-6" onSubmit={(e)=>submitForm(e, 'booking')}>
-          <h2 className="display-font text-2xl mb-4">Booking</h2>
-
-          <input type="date" className="form-input" value={state.date} onChange={e=>setState(s=>({...s,date:e.target.value}))} />
-          <input className="form-input" placeholder="Type of project" value={state.projectType} onChange={e=>setState(s=>({...s,projectType:e.target.value}))} />
-          <textarea className="form-input h-32" placeholder="Details" value={state.message} onChange={e=>setState(s=>({...s,message:e.target.value}))} />
-
-          <div className="flex items-center gap-3 mt-2">
-            <button type="submit" className="btn-brand" disabled={loading}>{loading ? 'Sending…' : 'Request booking'}</button>
-            {status && <span className={`text-sm ${status.ok ? 'text-green-400' : 'text-rose-400'}`}>{status.msg}</span>}
-          </div>
-        </form>
       </section>
     </main>
   )
