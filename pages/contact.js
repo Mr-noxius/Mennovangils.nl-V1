@@ -33,7 +33,7 @@ export default function Contact() {
 
   return (
     <main className="pt-24 min-h-screen px-6 pb-24">
-      <section className="max-w-6xl mx-auto py-16 grid md:grid-cols-2 gap-8">
+      <section className="max-w-6xl mx-auto py-16 grid md:grid-cols-1">
         <form className="service-card p-6" onSubmit={(e)=>submitForm(e, 'contact')}>
           <h2 className="display-font text-2xl mb-4">Contact</h2>
 
