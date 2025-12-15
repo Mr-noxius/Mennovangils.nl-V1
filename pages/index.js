@@ -14,7 +14,7 @@ export default function Home() {
             <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight text-white mb-4">Menno van Gils</h1>
             <p className="text-lg md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">18-year-old videographer in the Netherlands — aftermovies, social reels, and short films that feel cinematic.</p>
             <div className="flex gap-4 justify-center">
-              <Link href="/work" className="btn-brand">See Work</Link>
+              <Link href="/work" className="btn-outline">See Work</Link>
               <Link href="/about" className="btn-outline">About</Link>
             </div>
           </div>
