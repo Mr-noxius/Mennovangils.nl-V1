@@ -23,15 +23,15 @@ export default function Home() {
         <section className="bg-bg-light dark:bg-bg-dark py-20">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-8 bg-white/90 dark:bg-black/60 rounded-2xl shadow-lg">
+              <div className="service-card">
                 <h3 className="text-xl font-semibold mb-2">Aftermovies</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">High-energy event recaps designed for socials and festivals.</p>
               </div>
-              <div className="p-8 bg-white/90 dark:bg-black/60 rounded-2xl shadow-lg">
+              <div className="service-card">
                 <h3 className="text-xl font-semibold mb-2">Social Reels</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">Short vertical videos for TikTok & Instagram.</p>
               </div>
-              <div className="p-8 bg-white/90 dark:bg-black/60 rounded-2xl shadow-lg">
+              <div className="service-card">
                 <h3 className="text-xl font-semibold mb-2">Short Films</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">Narrative shorts and documentaries.</p>
               </div>
