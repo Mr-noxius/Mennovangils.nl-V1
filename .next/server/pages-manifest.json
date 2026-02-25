@@ -1,10 +1,11 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-  "/": "pages/index.js"
-=======
-  "/contact": "pages/contact.js"
->>>>>>> 22729de132f98c11578215fa2ddd38c13fe8c00e
+  "/about": "pages/about.html",
+  "/contact": "pages/contact.html",
+  "/api/contact": "pages/api/contact.js",
+  "/": "pages/index.html",
+  "/work": "pages/work.html",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.html"
 }

@@ -1,15 +1,43 @@
 import { useState } from 'react'
 import VideoModal from '../components/VideoModal'
 
+// Auto thumbnail generator
+function getThumbnail(item) {
+  if (item.thumbnail) return item.thumbnail
+
+  if (item.videoUrl?.includes('youtube') || item.videoUrl?.includes('youtu.be')) {
+    let id = ''
+
+    if (item.videoUrl.includes('v=')) {
+      id = item.videoUrl.split('v=')[1].split('&')[0]
+    } else {
+      id = item.videoUrl.split('/').pop()
+    }
+
+    return `https://img.youtube.com/vi/${id}/hqdefault.jpg`
+  }
+
+  return '/fallback.jpg'
+}
+
 const WORK_ITEMS = [
   {
-    id: 'dQw4w9WgXcQ',
     type: 'video',
     title: 'Sample Aftermovie',
-    thumbnail: `https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg`,
+    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   },
   {
-    id: 'image-1',
+    type: 'video',
+    title: 'Promo Teaser',
+    videoUrl: 'https://www.youtube.com/watch?v=mU6anWqZJcc',
+  },
+  {
+    type: 'video',
+    title: 'Frame.io Project',
+    videoUrl: 'https://share.frame.io/YOUR-LINK-HERE',
+    thumbnail: '/frame-thumb.jpg' // Frame.io heeft geen auto thumbs
+  },
+  {
     type: 'image',
     title: 'Money Rules The World',
     thumbnail: '/streetart.jpg',
@@ -17,17 +45,10 @@ const WORK_ITEMS = [
     comingSoon: true,
   },
   {
-    id: 'image-2',
     type: 'image',
     title: 'Event Poster',
     thumbnail: '/images/event-poster.jpg',
     full: '/images/event-poster.jpg',
-  },
-  {
-    id: 'mU6anWqZJcc',
-    type: 'video',
-    title: 'Promo Teaser',
-    thumbnail: `https://img.youtube.com/vi/mU6anWqZJcc/hqdefault.jpg`,
   },
 ]
 
@@ -54,9 +75,9 @@ export default function Work() {
         <p className="text-gray-300 mb-8">My latest and upcoming projects!</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {WORK_ITEMS.map(item => (
+          {WORK_ITEMS.map((item, index) => (
             <article
-              key={item.id}
+              key={index}
               role="button"
               aria-disabled={!!item.comingSoon}
               tabIndex={item.comingSoon ? -1 : 0}
@@ -64,21 +85,18 @@ export default function Work() {
               onKeyDown={(e) => handleKey(e, item)}
               className={`project-card select-none ${item.comingSoon ? 'cursor-not-allowed opacity-80' : 'cursor-pointer'}`}
             >
-              {/* thumbnail as background */}
               <div className="project-thumb rounded-md overflow-hidden">
                 <img
-                  src={item.thumbnail}
+                  src={getThumbnail(item)}
                   alt={item.title}
                   onError={(e)=>{e.target.style.display='none'}}
                 />
               </div>
 
-              {/* Coming soon tag placed at card root so it's top-right */}
               {item.comingSoon && (
                 <div className="coming-tag">Coming Soon</div>
               )}
 
-              {/* overlayed content (title + button). removed type line */}
               <div className="project-info">
                 <h3 className="text-xl font-bold mb-1">{item.title}</h3>
 
@@ -104,7 +122,7 @@ export default function Work() {
         <VideoModal
           open={!!selected}
           onClose={() => setSelected(null)}
-          videoId={selected.id}
+          videoUrl={selected.videoUrl}
         />
       )}
 
