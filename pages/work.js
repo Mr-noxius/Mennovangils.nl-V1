@@ -34,7 +34,7 @@ const WORK_ITEMS = [
   {
     type: 'video',
     title: 'Frame.io Project',
-    videoUrl: 'https://share.frame.io/YOUR-LINK-HERE',
+    videoUrl: 'https://f.io/xanveOVJ',
     thumbnail: '/frame-thumb.jpg' // Frame.io heeft geen auto thumbs
   },
   {
