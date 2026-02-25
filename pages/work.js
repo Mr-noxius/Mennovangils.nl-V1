@@ -23,8 +23,8 @@ function getThumbnail(item) {
 const WORK_ITEMS = [
   {
     type: 'video',
-    title: 'Sample Aftermovie',
-    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    title: 'Skills Heroes x World Skills 2025',
+    videoUrl: 'https://www.youtube.com/watch?v=ON0dbVNKMvM',
   },
   {
     type: 'video',
